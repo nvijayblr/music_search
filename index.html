@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Meta-Information -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Compucorp Music Search</title>
+		<link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="assets/loading-bar/loading-bar.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	</head>
+	
+	<body ng-app="musicLib" ng-controller="appCtrl">
+		<section class="header">
+			<div class="container">
+				<div class="logo">
+					<div class="logo-wrp down-arrow">
+						<img src="assets/images/hero-img@2x.png" class="logo-bg">
+					</div>
+				</div>
+			</div>
+		</section>
+		<section>
+			<div ui-view></div>
+		</section>
+	</body>
+	
+	<!--begin libs-->
+	<script src="assets/angular/jquery.min.js"></script>
+	<script src="assets/angular/angular.min.js"></script>
+	<script src="assets/angular/angular-ui-router.js"></script>
+	<script src="assets/loading-bar/loading-bar.min.js"></script>
+	
+	<script src="assets/moment/moment.js"></script>
+	
+	<script src="appJS/app.js"></script>
+
+	<!--begin services-->
+	<script src="appJS/services/BaseServices.js"></script>
+	<script src="appJS/services/HttpServices.js"></script>
+
+	<!--begin filters-->
+	<script src="appJS/filters/commonFilters.js"></script>
+
+	<!--begin controllers-->
+	<script src="appJS/controllers/musicLibCtrl.js"></script>
+	<script src="appJS/controllers/appCtrl.js"></script>
+	<script src="appJS/controllers/searchCtrl.js"></script>
+	<!--end controllers-->
+</html>

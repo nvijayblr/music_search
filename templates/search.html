@@ -1,0 +1,111 @@
+<section class="search">
+	<div class="container">
+		<div class="s-box">
+			<input type="text" class="s-txt" ng-model="searchText" placeholder="Search for an artist or album">
+			<button class="s-btn" ng-click="doSearch(searchText)">SEARCH</button>
+		</div>
+	</div>
+</section>
+
+<section class="srch-res">
+	<div class="container-album">
+		<div class="srch-icon" ng-if="!ladedResult">
+			<i class="fa fa-search s-icon" aria-hidden="true"></i>
+			<p>Your results will appear here.</p>
+		</div>
+		<div class="album-wrp clearfix" ng-if="ladedResult">
+			<div class="clearfix">
+				<h3>Artists</h3>
+				<div class="album" ng-repeat="artist in artists track by $index">
+					<div class="a-wrp" ng-click="viewArtistAlbums(artist)">
+						<div class="a-pic" ng-if="!artist.images.length">
+							<img src="assets/images/album.jpg">
+						</div>
+						<div class="a-pic" ng-if="artist.images.length">
+							<img ng-src="{{artist.images[1].url}}">
+						</div>
+						<div class="a-hov">
+							<i class="fa fa-music" aria-hidden="true"></i>
+							<h4 class="hov-title">View Albums</h4>
+						</div>
+						<!--<i class="fa fa-user-o a-icon" aria-hidden="true"></i>-->
+						<i class="fa fa-user-o a-icon" aria-hidden="true"></i>
+						<h4 class="a-title">{{artist.name}}</h4>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix">
+				<h3>Albums</h3>
+				<div class="album" ng-repeat="album in albums track by $index">
+					<div class="a-wrp" ng-click="viewAlbumsTracks(album)">
+						<div class="a-pic" ng-if="!album.images.length">
+							<img src="assets/images/album.jpg">
+						</div>
+						<div class="a-pic" ng-if="album.images.length">
+							<img ng-src="{{album.images[1].url}}">
+						</div>
+						<div class="a-hov">
+							<i class="fa fa-music" aria-hidden="true"></i>
+							<h4 class="hov-title">View Tracks</h4>
+						</div>
+						<i class="fa fa-dot-circle-o a-icon" aria-hidden="true"></i>
+						<h4 class="a-title">{{album.name}}</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="load-more" ng-show="showArtistLoadMore && ladedResult">
+		<button class="loadmore-btn" ng-click="loadMore()">SHOW ME MORE</button>
+	</div>
+</section>
+
+<div class="modal-backdrop fade" ng-class="showAlbumModel?'in':''"></div>
+
+<div class="modal fade" ng-class="showAlbumModel?'in':''">
+	<div class="modal-dialog">
+		<div class="modal-content" ng-show="showModel=='albums'">
+			<div class="modal-header">
+				<div class="a-pic" ng-if="!artist.images.length">
+					<img src="assets/images/album-big.jpg">
+				</div>
+				<div class="a-pic" ng-if="artist.images.length">
+					<img ng-src="{{artist.images[0].url}}">
+				</div>
+				<!--<img src="assets/images/album-big.jpg"/>-->
+				<span type="button" class="close" data-dismiss="modal" ng-click="closeAlbumModel()"></span>
+				<h2 class="name">{{artist.name}}</h2>
+			</div>
+			<div class="modal-body">
+				<h3>Albums</h3>
+				<div class="artist-alb-wrp clearfix" ng-repeat="album in artistAlbums track by $index">
+					<img src="assets/images/album-big.jpg" class="artist-alb-img" ng-if="!album.images.length">
+					<img ng-src="{{album.images[2].url}}" class="artist-alb-img" ng-if="album.images.length">
+					<h2>{{album.name}}</h2>
+					<p>{{album.type}}</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal-content" ng-show="showModel=='tracks'">
+			<div class="modal-header">
+				<div class="a-pic" ng-if="!track.images.length">
+					<img src="assets/images/album-big.jpg">
+				</div>
+				<div class="a-pic" ng-if="track.images.length">
+					<img ng-src="{{track.images[0].url}}">
+				</div>
+				<!--<img src="assets/images/album-big.jpg"/>-->
+				<span type="button" class="close" data-dismiss="modal" ng-click="closeAlbumModel()"></span>
+				<h2 class="name">{{track.name}}</h2>
+			</div>
+			<div class="modal-body">
+				<h3>Tracks</h3>
+				<div class="artist-alb-wrp clearfix" ng-repeat="track in albumTracks track by $index">
+					<h2>{{track.name}}</h2>
+					<p>{{track.duration_ms|convertMinSec}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
